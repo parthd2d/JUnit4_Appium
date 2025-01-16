@@ -1,0 +1,23 @@
+{
+  "server": "hub.browserstack.com",
+
+  "capabilities": {
+    "app": "-",
+    "bstack:options": {
+      "projectName": "First Junit4 Android Project",
+      "buildName": "-",
+      "sessionName": "BStack first_test",
+      "debug": true,
+      "userName": "-",
+      "accessKey": "-"
+    }
+  },
+
+  "environments": [
+    {
+      "deviceName": "Google Pixel 4",
+      "platformVersion": "11.0",
+      "platformName": "android"
+    }
+  ]
+}
