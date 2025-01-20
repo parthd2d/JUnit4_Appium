@@ -77,7 +77,7 @@ public class BrowserStackJUnitTest {
                 // bstackOptionsMap.remove("userName");
                 bstackOptionsMap.put("accessKey", System.getenv("BROWSERSTACK_ACCESS_KEY"));
                 bstackOptionsMap.put("userName", System.getenv("BROWSERSTACK_USERNAME"));
-                bstackOptionsMap.put("buildName", System.getenv("BROWSERSTACK_BUILD_NAME"));
+                // bstackOptionsMap.put("buildName", System.getenv("BROWSERSTACK_BUILD_NAME"));
                 options.setCapability(pair.getKey().toString(), bstackOptionsMap);
             }else if(options.getCapability(pair.getKey().toString()) == null){
                 options.setCapability(pair.getKey().toString(), pair.getValue());
