@@ -43,7 +43,8 @@ public class BrowserStackJUnitTest {
 
         if (System.getProperty("config") != null) {
             JSONParser parser = new JSONParser();
-            config = (JSONObject) parser.parse(new FileReader("src/test/resources/com/browserstack/" + System.getProperty("config")));
+            config = (JSONObject) parser
+                    .parse(new FileReader("src/test/resources/com/browserstack/" + System.getProperty("config")));
             int envs = ((JSONArray) config.get("environments")).size();
 
             for (int i = 0; i < envs; i++) {
@@ -69,17 +70,22 @@ public class BrowserStackJUnitTest {
         Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
         it = commonCapabilities.entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            if (pair.getKey().toString().equalsIgnoreCase("bstack:options")){
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getKey().toString().equalsIgnoreCase("bstack:options")) {
                 HashMap bstackOptionsMap = (HashMap) pair.getValue();
                 // bstackOptionsMap.putAll((HashMap) options.getCapability("bstack:options"));
                 // bstackOptionsMap.remove("accessKey");
                 // bstackOptionsMap.remove("userName");
                 bstackOptionsMap.put("accessKey", System.getenv("BROWSERSTACK_ACCESS_KEY"));
                 bstackOptionsMap.put("userName", System.getenv("BROWSERSTACK_USERNAME"));
-                // bstackOptionsMap.put("buildName", System.getenv("BROWSERSTACK_BUILD_NAME"));
+
+                String browserStackBuildName = System.getenv("BROWSERSTACK_BUILD_NAME");
+                if (browserStackBuildName != null && !browserStackBuildName.isEmpty()) {
+                    // If the environment variable is present and not empty, use it
+                    bstackOptionsMap.put("buildName", browserStackBuildName);
+                }
                 options.setCapability(pair.getKey().toString(), bstackOptionsMap);
-            }else if(options.getCapability(pair.getKey().toString()) == null){
+            } else if (options.getCapability(pair.getKey().toString()) == null) {
                 options.setCapability(pair.getKey().toString(), pair.getValue());
             }
         }
@@ -108,14 +114,15 @@ public class BrowserStackJUnitTest {
             local.start(LocalOptions);
         }
 
-        driver = new AndroidDriver(new URL("http://"+config.get("server")+"/wd/hub"), options);
+        driver = new AndroidDriver(new URL("http://" + config.get("server") + "/wd/hub"), options);
     }
 
     @After
     public void tearDown() throws Exception {
-        // Invoke driver.quit() to indicate that the test is completed. 
+        // Invoke driver.quit() to indicate that the test is completed.
         // Otherwise, it will appear as timed out on BrowserStack.
         driver.quit();
-        if (local != null) local.stop();
+        if (local != null)
+            local.stop();
     }
 }

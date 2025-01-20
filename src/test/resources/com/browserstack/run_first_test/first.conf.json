@@ -4,8 +4,8 @@
   "capabilities": {
     "app": "-",
     "bstack:options": {
-      "projectName": "First Junit4 Android Project",
-      "buildName": "-",
+      "projectName": "Junit4 Project",
+      "buildName": "JUnit4 Conf BuildName",
       "sessionName": "BStack first_test",
       "debug": true,
       "userName": "-",
