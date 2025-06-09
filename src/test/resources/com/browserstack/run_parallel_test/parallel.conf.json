@@ -15,14 +15,14 @@
 
   "environments": [
     {
-      "deviceName": "Google Pixel 8",
-      "platformVersion": "14.0",
+      "deviceName": "Samsung Galaxy S22",
+      "platformVersion": "12.0",
       "platformName": "android"
     },
 
     {
-      "deviceName": "Oneplus 12R",
-      "platformVersion": "14.0",
+      "deviceName": "Samsung Galaxy S21",
+      "platformVersion": "12.0",
       "platformName": "android"
     }
   ]
